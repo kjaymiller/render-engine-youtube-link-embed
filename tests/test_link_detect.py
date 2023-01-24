@@ -17,5 +17,5 @@ def test_youtube_shortlinks_found():
 def test_youtube_link_replaced_with_embed():
     """Tests that youtube links are replaced with embeds"""
     test_url = "http://www.youtube.com/watch?v=5qap5aO4i9A"
-    expected_text = '<iframe width="560" height="315" src="http://www.youtube.com/embed/{youtube_id}" frameborder="0" allowfullscreen></iframe>'
+    expected_text = f'<iframe width="560" height="315" src="http://www.youtube.com/embed/5qap5aO4i9A" frameborder="0" allowfullscreen></iframe>'
     assert replace_youtube_links_with_embeds(test_url) == expected_text
