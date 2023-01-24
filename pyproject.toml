@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "render_engine_youtube_embed"
+version = "2023.1.1"
+description = "A Render Engine Plugin for replacing Youtube Links with Embed Links"
+readme = "README.md"
+
+dependencies = ["render-engine>=2023.1.3a1"]
+
+[project.optional-dependencies]
+dev = ["pytest"]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[project.urls]
+homepage = "https://github.com/kjaymiller/render_engine_tailwindcss/"
+repository = "https://github.com/kjaymiller/render_engine_tailwindcss/"
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
