@@ -16,10 +16,9 @@ def replace_youtube_links_with_embeds(text):
     """
     get all youtube links on their own line and replace them with embeds
     """
-
     # find all youtube links
-    youtube_links = re.findall(r'http://www.youtube.com/watch\?v=[a-zA-Z0-9_-]+', text)
-    youtube_shortlinks = re.findall(r'http://youtu.be/[a-zA-Z0-9_-]+', text)
+    youtube_links = re.findall(r'https://www.youtube.com/watch\?v=[a-zA-Z0-9_-]+', text)
+    youtube_shortlinks = re.findall(r'https://youtu.be/[a-zA-Z0-9_-]+', text)
 
     
     for link in [*youtube_links, *youtube_shortlinks]:
