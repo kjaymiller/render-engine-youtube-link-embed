@@ -11,6 +11,6 @@ class YouTubeEmbed:
                 page.content = content
 
     @hook_impl
-    def pre_render_content(content: str) -> None:
-        content = replace_youtube_links_with_embeds(content)
-        return content
+    def pre_render_content(page: "Page") -> None:
+        content = replace_youtube_links_with_embeds(page.raw_content)
+        page.raw_content = content
