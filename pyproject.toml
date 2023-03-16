@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "render_engine_youtube_embed"
-version = "2023.1.1a3"
+version = "2023.1.1a4"
 description = "A Render Engine Plugin for replacing Youtube Links with Embed Links"
 readme = "README.md"
 
