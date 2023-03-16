@@ -7,11 +7,11 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
     uses: ./.github/workflows/tests.yml
   deploy:
     name: publishing
     needs: [test]
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/setup-python@v4
         with:
