@@ -5,6 +5,8 @@
 
 This plugin allows you to quickly embed a Youtube video into your page by adding the youtube link to the page on its own line.
 
+***
+
 ```markdown
 ---
 slug: new-youtube-video
@@ -29,7 +31,11 @@ Check out this new video!
 
 ```
 
-This also works for YouTube short links (e.g. `https://youtu.be/QH2-TGUlwu4`).
+This also works for the following YouTube links:
+- Long Links with video ID in query string - `https://www.youtube.com/watch?v=QH2-TGUlwu4`
+- Long Links with video ID in path - `https://www.youtube.com/watch/QH2-TGUlwu4`
+- Youtube Shorts Links - `https://www.youtube.com/shorts/QH2-TGUlwu4`
+- YouTube short links - `https://youtu.be/QH2-TGUlwu4`
 
 ***Note:***
 It does not work for playlists or channels.

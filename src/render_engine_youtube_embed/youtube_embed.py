@@ -1,34 +1,49 @@
+import dataclasses
+import typing
 import re
+
 import logging
+import itertools
 
 
 def extract_youtube_id(url: str) -> str:
     """
     Extract the video id from a youtube url
     """
-    if url.startswith('https://www.youtube.com/watch?v='):
-        return url.split('=')[-1]
 
-    elif url.startswith('https://www.youtube.com/watch/'):
-        return url.split('/')[-1]
+    matches = (
+        ('https://www.youtube.com/watch?v=', '='),
+        ('https://www.youtube.com/watch/', '/'),
+        ('https://www.youtube.com/shorts/', '/'),
+        ('https://youtu.be/', '/'),
+    )
 
-    elif url.startswith('https://youtu.be/'):
-        return url.split('/')[-1]
+    for matcher, splitter in matches:
+        if url.startswith(matcher):
+            return url.split(splitter)[-1]
 
 
+def get_all_links(content: str) -> typing.Generator[str, None, None]:
+    """get all youtube link types"""
 
-def replace_youtube_links_with_embeds(content: str) -> None:
-    """
-    get all youtube links on their own line and replace them with embeds
-    """
-    # find all youtube links
-    youtube_links = re.findall(r'^ *https://www.youtube.com/watch\?v=[\w\d_]+ *$', content, re.MULTILINE)
-    youtube_slash_links = re.findall(r'^ *https://www.youtube.com/watch\/[\w\d_]+ *$', content, re.MULTILINE)
-    youtube_shortlinks = re.findall(r'^ *https://youtu.be/[\w\d_]+ *$', content, re.MULTILINE)
-    
-    for link in [*youtube_links, *youtube_slash_links, *youtube_shortlinks]:
+    youtube_links = r'^ *https://www.youtube.com/watch\?v=[\w\d_]+ *$'
+    youtube_slash_links = r'^ *https://www.youtube.com/watch\/[\w\d_]+ *$'
+    youtube_shortlinks = r'^ *https://youtu.be/[\w\d_]+ *$'
+    youtube_shorts = r'^ *https://www.youtube.com/shorts/[\w\d_]+ *$'
+
+    links = [youtube_links, youtube_slash_links, youtube_shortlinks, youtube_shorts]
+    link_groups = [re.findall(link_type, content, re.MULTILINE) for link_type in links]
+
+    return itertools.chain(*link_groups)
+
+def replace_youtube_links_with_embeds(content: str) -> str:
+    """replace them with embeds"""
+
+    links = get_all_links(content)
+
+    for link in links:
         youtube_id = extract_youtube_id(link)
-        logging.warning(f"replacing youtube_id: {youtube_id}")
+        logging.info(f"replacing youtube_id: {youtube_id}")
 
         # replace the link with the embed
         embed = f"<iframe width='560' height='315' src='https://www.youtube.com/embed/{youtube_id}' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media;' allowfullscreen></iframe>"
