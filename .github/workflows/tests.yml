@@ -1,12 +1,17 @@
 # Create GH Action to run pytest
 
 name: Tests
+run-name: ${{ github.actor }} - PyTest
 on: [push, pull_request]
-runs-on: ubuntu-latest
-uses: actions/checkout@v2
-uses: actions/setup-python@v4
-with:
-  python-version: 3.11
-  run: |
-    pip install -r requirements.txt
-    python -m pytest
+
+jobs:
+  run-pytest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v4
+        with:
+           python-version: "3.11"
+      run: |
+        pip install -r requirements.txt
+        python -m pytest
