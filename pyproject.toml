@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools", "wheel"]
+requires = ["setuptools", "setuptools_scm", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -9,6 +9,10 @@ readme = "README.md"
 dynamic = ["version"]
 
 dependencies = ["render-engine>=2023.3.1b1"]
+
+[tool.setuptools_scm]
+local_scheme = "no-local-version"
+# version_scheme = "python-simplified-semver"
 
 [project.optional-dependencies]
 dev = ["pytest"]
