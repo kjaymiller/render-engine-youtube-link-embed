@@ -17,7 +17,9 @@ jobs:
         with:
           python-version: "3.11"
       - name: Build distributions
-        run: python -m build
+        run: |
+          python pip install build twine
+          python -m build
   
       - name: Publish package to PyPI
         if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags')
