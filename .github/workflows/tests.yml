@@ -2,7 +2,7 @@
 
 name: Tests
 run-name: ${{ github.actor }} - PyTest
-on: [push, pull_request, workflow_call]
+on: [pull_request, workflow_call]
 
 jobs:
   run-pytest:
