@@ -18,7 +18,7 @@ jobs:
           python-version: "3.11"
       - name: Build distributions
         run: |
-          python pip install build twine
+          python -m pip install build twine
           python -m build
   
       - name: Publish package to PyPI
