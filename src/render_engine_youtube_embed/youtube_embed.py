@@ -1,4 +1,3 @@
-import dataclasses
 import typing
 import re
 
@@ -26,10 +25,10 @@ def extract_youtube_id(url: str) -> str:
 def get_all_links(content: str) -> typing.Generator[str, None, None]:
     """get all youtube link types"""
 
-    youtube_links = r'^ *https://www.youtube.com/watch\?v=[\w\d_]+ *$'
-    youtube_slash_links = r'^ *https://www.youtube.com/watch\/[\w\d_]+ *$'
-    youtube_shortlinks = r'^ *https://youtu.be/[\w\d_]+ *$'
-    youtube_shorts = r'^ *https://www.youtube.com/shorts/[\w\d_]+ *$'
+    youtube_links = r'^ *<p>https://www.youtube.com/watch\?v=[\w\d_]+</p> *$'
+    youtube_slash_links = r'^ *<p>https://www.youtube.com/watch\/[\w\d_]+</p> *$'
+    youtube_shortlinks = r'^ *<p>https://youtu.be/[\w\d_]+</p> *$'
+    youtube_shorts = r'^ *<p>https://www.youtube.com/shorts/[\w\d_]+</p> *$'
 
     links = [youtube_links, youtube_slash_links, youtube_shortlinks, youtube_shorts]
     link_groups = [re.findall(link_type, content, re.MULTILINE) for link_type in links]
