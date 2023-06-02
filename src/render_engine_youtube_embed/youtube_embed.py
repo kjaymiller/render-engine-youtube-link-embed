@@ -1,5 +1,6 @@
 import typing
 import re
+from urllib.parse import urlsplit
 
 import logging
 import itertools
@@ -10,16 +11,19 @@ def extract_youtube_id(url: str) -> str:
     Extract the video id from a youtube url
     """
 
-    matches = (
-        ('https://www.youtube.com/watch?v=', '='),
-        ('https://www.youtube.com/watch/', '/'),
-        ('https://www.youtube.com/shorts/', '/'),
-        ('https://youtu.be/', '/'),
-    )
+    # split the url from the query string
+    url = re.sub(r'\<\/{0,1}p\>', '', url)
+    url = urlsplit(url)
+    print(url)
+    
+    # check for v in the query string
+    if 'v' in url.query:
+        return url.query.split('=')[-1]
 
-    for matcher, splitter in matches:
-        if url.startswith(matcher):
-            return url.split(splitter)[-1]
+    else:
+        return url.path.split('/')[-1]
+
+
 
 
 def get_all_links(content: str) -> typing.Generator[str, None, None]:
