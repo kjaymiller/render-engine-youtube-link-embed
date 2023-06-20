@@ -14,7 +14,6 @@ def extract_youtube_id(url: str) -> str:
     # split the url from the query string
     url = re.sub(r'\<\/{0,1}p\>', '', url)
     url = urlsplit(url)
-    print(url)
     
     # check for v in the query string
     if 'v' in url.query:
