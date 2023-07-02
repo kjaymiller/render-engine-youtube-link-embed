@@ -1,3 +1,4 @@
+import logging
 from render_engine.hookspecs import hook_impl
 from .youtube_embed import replace_youtube_links_with_embeds
 
@@ -8,11 +9,7 @@ class YouTubeEmbed:
             content = replace_youtube_links_with_embeds(page.content)    
             page.content = content
 
-    # @hook_impl
-    # def render_content(page: "Page") -> None:
-    #     content = replace_youtube_links_with_embeds(page.content)    
-    #     page.content = content
-
     @hook_impl
     def post_render_content(page: "Page") -> None:
+        logging.warning("post_render_content called for {}" % page)
         page.rendered_content = replace_youtube_links_with_embeds(page.rendered_content)
