@@ -8,7 +8,11 @@ class YouTubeEmbed:
             content = replace_youtube_links_with_embeds(page.content)    
             page.content = content
 
+    # @hook_impl
+    # def render_content(page: "Page") -> None:
+    #     content = replace_youtube_links_with_embeds(page.content)    
+    #     page.content = content
+
     @hook_impl
-    def render_content(Page: "Page") -> None:
-        content = replace_youtube_links_with_embeds(Page._content)    
-        Page.content= content
+    def post_render_content(page: "Page") -> None:
+        page.rendered_content = replace_youtube_links_with_embeds(page.rendered_content)
