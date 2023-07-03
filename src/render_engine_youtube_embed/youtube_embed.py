@@ -27,10 +27,10 @@ def extract_youtube_id(url: str) -> str:
 
 def get_all_links(content: str) -> typing.Generator[str, None, None]:
     """get all youtube link types"""
-    youtube_links = r'^[ \t]*<p>https://www.youtube.com/watch\?v=[\w\d_]+</p>\s*$'
-    youtube_slash_links = r'^[ \t]*<p>https://www.youtube.com/watch\/[\w\d_]+</p>\s*$'
-    youtube_shortlinks = r'^[ \t]*<p>https://youtu.be/[\w\d_]+</p>\s*$'
-    youtube_shorts = r'^[ \t]*<p>https://www.youtube.com/shorts/[\w\d_]*</p>\s*$'
+    youtube_links = r'^[ \t]*<p>https://(?:www.){0,1}youtube.com/watch\?v=[\w\d_]+</p>\s*$'
+    youtube_slash_links = r'^[ \t]*<p>https://(?:www.){0,1}youtube.com/watch\/[\w\d_]+</p>\s*$'
+    youtube_shortlinks = r'^[ \t]*<p>https://(?:www.){0,1}youtu.be/[\w\d_]+</p>\s*$'
+    youtube_shorts = r'^[ \t]*<p>https://(?:www.){0,1}youtube.com/shorts/[\w\d_]*</p>\s*$'
     
 
     links = [youtube_links, youtube_slash_links, youtube_shortlinks, youtube_shorts]
