@@ -1,6 +1,9 @@
 name: Publish 
 run-name: ${{ github.actor }} - Publish 
 on: 
+  push:
+    tags:
+      - '*.*.*'
   release: 
     types: [published]
 
