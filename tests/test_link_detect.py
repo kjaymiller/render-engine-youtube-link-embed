@@ -21,9 +21,11 @@ def test_youtube_links_found(test_url, expected_id):
 def test_youtube_link_replaced_with_embed():
     """Tests that youtube links are replaced with embeds"""
     test_url = "<p>https://www.youtube.com/watch?v=5qap5aO4i9A</p>"
-    expected_text = "<iframe width='560' height='315' src='https://www.youtube.com/embed/5qap5aO4i9A' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media;' allowfullscreen></iframe>"
-    assert replace_youtube_links_with_embeds(test_url) == expected_text
+    embed = replace_youtube_links_with_embeds(test_url) 
 
+    assert 'https://www.youtube.com/embed/5qap5aO4i9A' in embed
+    assert "aria-label='youtube-embed'" in embed
+    assert "title='YouTube Video Player'" in embed
 
 def test_multiple_text():
 
@@ -37,4 +39,6 @@ def test_multiple_text():
     """
 
     replaced_text = replace_youtube_links_with_embeds(text)
-    assert "<iframe width='560' height='315' src='https://www.youtube.com/embed/ds6LG_N0Irw' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media;' allowfullscreen></iframe>" in replaced_text
+    assert 'https://www.youtube.com/embed/ds6LG_N0Irw' in replaced_text
+    assert "aria-label='youtube-embed'" in replaced_text
+    assert "title='YouTube Video Player'" in replaced_text
