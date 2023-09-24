@@ -48,7 +48,7 @@ def replace_youtube_links_with_embeds(content: str) -> str:
         logging.info(f"replacing youtube_id: {youtube_id}")
 
         # replace the link with the embed
-        embed = f"<iframe width='560' height='315' src='https://www.youtube.com/embed/{youtube_id}' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media;' allowfullscreen></iframe>"
+        embed = f"<iframe aria-label='youtube-embed' title='YouTube Video Player' width='560' height='315' src='https://www.youtube.com/embed/{youtube_id}' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media;' allowfullscreen></iframe>"
         content = content.replace(link, embed)
     
     return content
