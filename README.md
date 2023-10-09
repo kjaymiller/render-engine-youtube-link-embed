@@ -1,8 +1,5 @@
 # Render Engine YouTube Link Embed Plugin
 
-> ***Note:*** This plugin is in the early development stage. It is not yet ready for production use.
-
-
 This plugin allows you to quickly embed a Youtube video into your page by adding the youtube link to the page on its own line.
 
 ***
