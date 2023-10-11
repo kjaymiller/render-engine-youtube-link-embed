@@ -18,7 +18,24 @@ def test_youtube_links_found(test_url, expected_id):
     """Test that youtube links are found"""
     assert extract_youtube_id(test_url) == expected_id
 
-def test_youtube_link_replaced_with_embed():
+@pytest.mark.parametrize(
+        "test_url",
+        [
+        "https://www.youtube.com/watch?v=FRnKY-5TqOM",
+        "https://www.youtube.com/watch/FRnKY-5TqOM",
+        "https://www.youtube.com/shorts/FRnKY-5TqOM",
+        "https://youtu.be/FRnKY-5TqOM",
+        "<p>https://www.youtube.com/watch?v=FRnKY-5TqOM</p>",
+        "<p>https://www.youtube.com/watch/FRnKY-5TqOM</p>",
+        "<p>https://www.youtube.com/shorts/FRnKY-5TqOM</p>",
+        "<p>https://youtu.be/FRnKY-5TqOM</p>",
+        ])
+def test_youtube_links_with_hyphens(test_url):
+    """Test that youtube links with hyphens are found"""
+    assert extract_youtube_id(test_url) == "FRnKY-5TqOM"
+
+@pytest.mark.parametrize("test_url", test_urls)
+def test_youtube_link_replaced_with_embed(test_url):
     """Tests that youtube links are replaced with embeds"""
     test_url = "<p>https://www.youtube.com/watch?v=5qap5aO4i9A</p>"
     embed = replace_youtube_links_with_embeds(test_url) 
