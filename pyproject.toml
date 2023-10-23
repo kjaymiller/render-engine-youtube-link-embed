@@ -8,7 +8,7 @@ description = "A Render Engine Plugin for replacing Youtube Links with Embed Lin
 readme = "README.md"
 dynamic = ["version"]
 
-dependencies = ["render-engine>=2023.10.2a1"]
+dependencies = ["render-engine>=2023.10.2a6"]
 
 [tool.setuptools_scm]
 local_scheme = "no-local-version"
