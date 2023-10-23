@@ -100,3 +100,20 @@ def test_replace_in_collection_page(site, test_url, tmp_path_factory):
 
     output = tmp_path_factory.getbasetemp().joinpath("output/testcontentpage/page.html")
     assert "youtube-embed" in output.read_text()
+
+
+@pytest.mark.parametrize("test_url", test_urls)
+def test_replace_in_collection_page(site, test_url, tmp_path_factory):
+    """Tests the rendering with render engine archive pages should also be updated"""
+    Path(tmp_path_factory.getbasetemp() / "content").mkdir(parents=True, exist_ok=True)
+    Path(tmp_path_factory.getbasetemp() / "content/testcontentpage.md").write_text(f"---\ntitle:test_collection_page\n---\n\n{test_url}")
+    @site.collection
+    class TestCollection(Collection):
+        content_path = tmp_path_factory.getbasetemp()/ "content"
+        routes = ["testcontentpage"]
+        has_archive = True
+
+    site.render()
+
+    output = tmp_path_factory.getbasetemp().joinpath("output/testcontentpage/page.html")
+    assert "youtube-embed" in output.read_text()

@@ -23,8 +23,6 @@ def extract_youtube_id(url: str) -> str:
         return url.path.split('/')[-1]
 
 
-
-
 def get_all_links(content: str) -> typing.Generator[str, None, None]:
     """get all youtube link types"""
     youtube_links = r'^[ \t]*https://(?:www.){0,1}youtube.com/watch\?v=[\w\d_\-]+\s*$'
